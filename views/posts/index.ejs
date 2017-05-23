@@ -9,15 +9,22 @@
     <script type="text/javascript" src="/js/main.js" defer></script>
   </head>
   <body>
-    <h1>/OldSchoolCool Posts</h1>
-    <div id="search-results"></div>
+    <h1>/OldSchoolCool</h1>
+    <ul id="results"></ul>
     <!--handlebar template-->
     <script id="search-results-template" type="text/x-handlebars-template">
        {{#each data}}
-         <div>
-           <h3>TITLE: {{ children.["0"].data.title }}</h3>
-           <p> by: {{ children.["0"].data.author }}</p>
+         <div class="result-item">
+           <h3>TITLE: {{ data.children.0.data.title }}</h3>
+           <p>by: {{ data.children.0.data.author }}</p>
 
+           <br />
+           <form action="/posts" method="POST">
+             <input type="hidden" name="post[title]" value=""<br>
+             <input type="hidden" name="post[image_url]" value=""<br>
+             <input type="hidden" name="post[author]" value=""<br>
+             <input type="submit" value="Save Post">
+           </form>
         </div>
       {{/each}}
     </script>

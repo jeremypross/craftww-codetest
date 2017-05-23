@@ -1,7 +1,2 @@
 .gitignore
 node_modules/
-
-<p>by: {{children.[0].data.author}}</p>
-  <img src="{{children.[0].data.preview.images.[0].source.url}}" alt="">
-  <br>
-  <p> by: {{ data.children.["0"].data.author }}</p>

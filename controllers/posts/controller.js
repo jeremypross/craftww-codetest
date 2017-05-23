@@ -16,11 +16,11 @@ controller.search = (req, res) => {
   Reddit
     .getPosts()
     .then(r => r.json())
-    .then(data => res.json({ data: data }))
+    .then((data) => {
+      res.render('posts/index', { posts: data })
+    })
     .catch((err) => console.log('ERROR', err));
 }
-
-
 
 controller.create = (req, res) => {
   Post
