@@ -15,7 +15,8 @@
     <script id="search-results-template" type="text/x-handlebars-template">
        {{#each data}}
          <div>
-           <h3>TITLE: {{data.children.[0].data.title}}</h3>
+           <h3>TITLE: {{ children.["0"].data.title }}</h3>
+           <p> by: {{ children.["0"].data.author }}</p>
 
         </div>
       {{/each}}
