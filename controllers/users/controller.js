@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
 
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 const controller = {};
 
@@ -13,7 +14,7 @@ controller.new = (req, res) => {
 controller.create = (req, res) => {
   User
     .create(req.body.user)
-    .then(() => res.redirect('/users/new'))
+    .then(() => res.redirect('/users/login'))
     .catch((err) => console.log('ERROR', err));
 };
 

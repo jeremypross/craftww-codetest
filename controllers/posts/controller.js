@@ -1,4 +1,5 @@
 const Post = require('../../models/Post');
+const Reddit = require('../../services/Reddit');
 
 const controller = {};
 
@@ -6,10 +7,20 @@ controller.index = (req, res) => {
   Post
     .findAll()
     .then((data) => {
-      res.render('/posts/index', { posts: data })
-      .catch((err) => console.log('ERROR:', err));
+      res.render('posts/index', { posts: data })
     })
+    .catch((err) => console.log('ERROR:', err));
 }
+
+controller.search = (req, res) => {
+  Reddit
+    .getPosts()
+    .then(r => r.json())
+    .then(data => res.json({ data: data }))
+    .catch((err) => console.log('ERROR', err));
+}
+
+
 
 controller.create = (req, res) => {
   Post

@@ -4,6 +4,8 @@ const controller = require('./controller');
 
 router.get('/', controller.index);
 
+router.get('/', controller.search);
+
 router.post('/', controller.create);
 
 router.post('/favorites', controller.favorite);

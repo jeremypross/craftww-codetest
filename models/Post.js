@@ -5,7 +5,7 @@ const Post = {};
 Post.findAll = () => {
   return db.manyOrNone(`
     SELECT *
-    FROM beers;`
+    FROM posts;`
   )
 }
 
@@ -34,11 +34,12 @@ Post.findById = (user_id) => {
       posts.id,
       posts.title,
       posts.image_url,
-      posts.author
+      posts.author,
+      posts.user_id
     FROM posts
     INNER JOIN users
     ON posts.user_id = users.id
-    WHERE users.id = $1`,
+    WHERE user_id = $1`,
     [user_id]
   );
 }
