@@ -16,7 +16,7 @@
         <img src="<%= post.image_url %>" alt="<%= post.title %>" width="400">
         <!-- Delete Post form: -->
         <form method ="POST" action="/posts/<%= post.id %>?_method=DELETE">
-          <input type="submit" name="" value="Delete Post">
+          <input type="submit" value="Delete Post">
         </form>
       <% }) %>
 

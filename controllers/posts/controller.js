@@ -31,16 +31,16 @@ controller.create = (req, res) => {
     .catch((err) => console.log('ERROR', err));
 }
 
-controller.favorite = (req, res) => {
-  Post
-    .addFavorite(req.body.post.id, req.session.user.id)
-    .then(() => res.redirect('/posts'))
-    .catch((err) => console.log('ERROR', err));
-}
+// controller.favorite = (req, res) => {
+//   Post
+//     .addFavorite(req.body.post.id, req.session.user.id)
+//     .then(() => res.redirect('/posts'))
+//     .catch((err) => console.log('ERROR', err));
+// }
 
-controller.delete = (req, res) => {
+controller.destroy = (req, res) => {
   Post
-    .delete(req.params.id, req.session,user.id)
+    .destroy(req.params.id)
     .then(() => {
       res.redirect(`/users/${req.session.user.id}/posts`)
     })

@@ -45,12 +45,11 @@ Post.findById = (user_id) => {
   );
 }
 
-Post.delete = (post, user) => {
+Post.destroy = (id) => {
   return db.none(`
     DELETE FROM posts
-    WHERE user_id = $1
-    AND id = $2`,
-    [user, post]
+    WHERE id = $1`,
+    [id]
     );
 }
 

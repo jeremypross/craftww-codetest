@@ -12,7 +12,7 @@ $(document).ready(() => {
     })
     // render view with the json object through handlebars
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       $('#results').html(searchTemplate(data));
     })
     .catch(err => console.log('ERROR:', err));
