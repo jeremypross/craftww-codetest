@@ -10,20 +10,20 @@
   </head>
   <body>
     <% include ../partials/nav %>
-    <h1>/OldSchoolCool</h1>
     <div id="results"></div>
     <!--handlebar template-->
     <script id="search-results-template" type="text/x-handlebars-template">
        {{#each data.children}}
          <div class="result-item">
-           <h3>TITLE: {{ data.title }}</h3>
-           <p>by: {{ data.author }}</p>
+           <h3>Title: {{ data.title }}</h3>
+           <p>Posted by: {{ data.author }}</p>
            <img src="{{ data.preview.images.[0].source.url }}" alt="{{data.title}}" width="400">
            <br />
            <form action="/posts" method="POST">
              <input type="hidden" name="post[title]" value="{{ data.title }}" />
              <input type="hidden" name="post[image_url]" value="{{ data.preview.images.[0].source.url }}" />
              <input type="hidden" name="post[author]" value="{{ data.author }}" />
+             <input type="hidden" name="post[user_id]" value="1" />
              <input type="submit" value="Save Post">
            </form>
         </div>

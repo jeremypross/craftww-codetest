@@ -8,6 +8,17 @@
     <% include ../partials/nav %>
     <main>
       <h1>User Dashboard</h1>
+      <h2>Favorite Posts:</h2>
+      <!-- Render user's favorite posts here:  -->
+      <% posts.forEach((post) => { %>
+        <h3><%= post.title %></h3>
+        <p>by: <%= post.author %></p>
+        <img src="<%= post.image_url %>" alt="<%= post.title %>" width="400">
+        <!-- Delete Post form: -->
+        <form method ="POST" action="/posts/<%= post.id %>?_method=DELETE">
+          <input type="submit" name="" value="Delete Post">
+        </form>
+      <% }) %>
 
     </main>
   </body>

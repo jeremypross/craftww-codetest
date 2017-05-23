@@ -55,7 +55,7 @@ controller.process_login = (req, res) => {
 controller.show = (req, res) => {
   Post
     // find posts associated with user id
-    .findById(req.params.id)
+    .findAll()
     // render data in show
     .then((data) =>
       res.render('users/show', { posts: data }))

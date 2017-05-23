@@ -25,7 +25,9 @@ controller.search = (req, res) => {
 controller.create = (req, res) => {
   Post
     .create(req.body.post)
-    .then(() => res.redirect('/posts'))
+    .then((data) => {
+      res.redirect('/posts')
+    })
     .catch((err) => console.log('ERROR', err));
 }
 

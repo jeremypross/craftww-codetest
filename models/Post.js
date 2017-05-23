@@ -10,11 +10,12 @@ Post.findAll = () => {
 }
 
 Post.create = (post, id) => {
+  console.log('POST in model', post)
   return db.none(`
     INSERT INTO posts
     (title, image_url, author, user_id)
     VALUES
-    ($1, $2, $3);`,
+    ($1, $2, $3, $4);`,
     [post.title, post.image_url, post.author, id]
   );
 }
