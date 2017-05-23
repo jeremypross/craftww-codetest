@@ -3,6 +3,7 @@ $(document).ready(() => {
 
   const searchResults  = $('#search-results-template').html();
   const searchTemplate = Handlebars.compile(searchResults);
+  const $results = $('#results');
 
   const findSubReddits = () => {
     $.ajax({

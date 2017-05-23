@@ -7,7 +7,7 @@ controller.index = (req, res) => {
   Post
     .findAll()
     .then((data) => {
-      res.render('posts/index', { posts: data })
+      res.render('posts/index', { data: data })
     })
     .catch((err) => console.log('ERROR:', err));
 }
@@ -17,7 +17,7 @@ controller.search = (req, res) => {
     .getPosts()
     .then(r => r.json())
     .then((data) => {
-      res.render('posts/index', { posts: data })
+      res.render('posts/index', { data: data })
     })
     .catch((err) => console.log('ERROR', err));
 }
