@@ -5,16 +5,6 @@ const User = require('../../models/User');
 
 const controller = {};
 
-
-// controller.index = (req, res) => {
-//   User
-//     .findAll()
-//     .then((data) => {
-//       res.json({ user: data })
-//     })
-//     .catch((err) => console.log('ERROR', err));
-// }
-
 controller.new = (req, res) => {
   // render views/users/new.ejs
   res.render('users/new');
@@ -34,50 +24,41 @@ controller.login = (req, res) => {
     res.render('users/login', { message: error.message });
 }
 
-controller.authorizeToken = (req, res) => {
-  jwt.verify(req.headers.authorization, 'taco cat', (err, decoded) => {
-    if (err) {
-      res
-        .status(401)
-        .json({ error: err.message });
-    } else {
-      res
-        .status(200)
-        console.log("TOKEN AUTHORIZED!!");
-        // find saved items to dashboard here
-    }
-  })
-}
-
 controller.process_login = (req, res) => {
   User
     .findByEmail(req.body.user.email)
     .then((user) => {
-      // if user exists in database
+      // if user exists
       if (user) {
+        // returns boolean
         const isAuthed = bcrypt.compareSync(req.body.user.password, user.password_digest);
-        // and password matches hashed passeword
         if (isAuthed) {
-          // create web token
-          const token = jwt.sign({
-            email: user.email,
-            user_id: user.id
-          }, 'taco cat', { expiresIn: '7d' });
-            // response includes token and user_id
-            res.json({ token: {
-                token: token,
-                user_id: user.id,
-                loggedIn: true
-            }
-          });
+          // start session
+          req.session.isAuthenticated = true;
+          // delete hashed password
+          delete user.password_digest;
+          // store user info
+          req.session.user = user;
+          // redirect to user's show page
+          res.redirect(`/users/${user.id}/posts`)
         } else {
-          res.sendStatus(401)
+          // else send user back to login view
+          res.redirect('/users/login?error=true');
         }
       } else {
-        res.status(404)
-        .json({ error: 'No user found!' });
+        res.redirect('/users/login?error=true')
       }
     });
+}
+
+controller.show = (req, res) => {
+  Post
+    // find posts associated with user id
+    .findById(req.params.id)
+    // render data in show
+    .then((data) =>
+      res.render('users/show', { posts: data }))
+    .catch(err => console.log('ERROR:', err));
 }
 
 controller.destroy = (req, res) => {

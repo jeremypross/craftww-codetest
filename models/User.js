@@ -9,7 +9,7 @@ User.findAll = () => {
 
 User.create = (user) => {
   console.log('User.create in model', user);
-  const password = bcrypt.hashSync(user.password_digest, 10);
+  const password = bcrypt.hashSync(user.password, 10);
   return db.one(`
     INSERT INTO users
     (first_name, last_name, email, password_digest)
@@ -24,11 +24,11 @@ User.create = (user) => {
   );
 };
 
-User.findById = (id) => {
+User.findByEmail = (email) => {
   return db.oneOrNone(`
     SELECT * FROM users
-    WHERE id = $1;`,
-    [id]
+    WHERE email = $1;`,
+    [email]
   );
 };
 

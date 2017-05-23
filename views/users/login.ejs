@@ -5,13 +5,14 @@
     <title>Login User</title>
   </head>
   <body>
+    <% include ../partials/nav %>
     <main>
       <form action="/users/login" method="POST">
         <input type="email" name="user[email]" placeholder="email"><br />
         <input type="password" name="user[password]" placeholder="password"><br />
         <input type="submit" value="Login">
       </form>
-      <% if (message) %>
+      <% if (message) { %>
         <p><%= message %></p>
       <% } %>
     </main>
